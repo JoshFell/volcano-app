@@ -1,20 +1,24 @@
 import React, {useState} from 'react'
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Alert } from 'react-bootstrap'
 
 function Register() {
-  const API_URL = `http://sefdb02.qut.edu.au:3001/user/register`
+  const API_URL = `http://sefdb02.qut.edu.au:3001`
   //mayhaps hook------
   const EMAIL = "";
   const PASSWORD = "";
   //------------------
 
-  function Register(){
-    return fetch(API_URL, {
-      method: "POST",
-      headers: {accept: "application/json", "Content-Type" : "application/json"},
-      body: JSON.stringify({email: EMAIL, password: PASSWORD}) 
-    })
-  }
+  function RegisterUser(){
+    const url = `${API_URL}/user/register`;
+    
+    return fetch(url, {
+    method: "POST",
+    headers: {accept: "application/json", "Content-Type" : "application/json"},
+    body: JSON.stringify({email: "mike@gmail.com", password: "password"}) 
+  })
+  .then(res => res.json())
+  .then(res => console.log(res))
+}
 
   return (
     <div className='container'>
@@ -29,7 +33,7 @@ function Register() {
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" placeholder="Password" />
         </Form.Group>
-        <Button variant="danger" type="submit">
+        <Button variant="danger" onClick={RegisterUser}>
           Register
         </Button>
     </Form>

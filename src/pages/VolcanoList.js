@@ -20,11 +20,11 @@ function VolcanoList() {
 
 
   const columns = [
-    {headername: "ID", field: "id", hide: true},
-    {headername: "Name", field: "name", filter: true},
-    {headername: "Country", field: "country"},
-    {headername: "Region", field: "region"},
-    {headername: "Subregion", field: "subregion"}
+    {headerName: "ID", field: "id", hide: true},
+    {headerName: "Name", field: "name", filter: true},
+    {headerName: "Country", field: "country"},
+    {headerName: "Region", field: "region"},
+    {headerName: "Subregion", field: "subregion"}
   ]
 
   const [rowData, setRowData] = useState([]);

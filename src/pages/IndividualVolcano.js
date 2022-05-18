@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Map, Marker } from 'pigeon-maps';
-import { Bar } from 'react-chartjs-2';  
+import { Bar } from 'react-chartjs-2'; 
 import "./IndividualVolcano.css"
-
 
 export default function Volcano() {
     const navigate = useNavigate();
@@ -29,12 +28,13 @@ export default function Volcano() {
   const [center, setCenter] = useState([LATITUDE, LONGITUDE])
   const [zoom, setZoom] = useState(10)
 
-
   return (
     <div className='container'>
         <h1 className='volcano-title'>{volcanoData.name}</h1>
         <h2 className='country-title'>{volcanoData.country}</h2>
+
         <hr />
+
         <h3>Volcano Information</h3>
         <p>Subregion: {volcanoData.subregion}</p>
         <p>Last Eruption: {volcanoData.last_eruption}</p>
@@ -42,6 +42,7 @@ export default function Volcano() {
         <p>Elevation: {volcanoData.elevation}ft</p>
         <p>Latitude: {volcanoData.latitude}</p>
         <p>Longitude: {volcanoData.longitude}</p>
+
         <hr />
 
         <div className='volcano-map'>
@@ -63,9 +64,17 @@ export default function Volcano() {
 
         <div className='volcano-graph'>
             <h3>Population Information</h3>
-            {/* <Bar>
+            {/* <Bar
+              data={{
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+              }}
+              height={400}
+              width={600}
+              options={{
+                maintainAspectRatio: false,
+              }}
+              /> */}
 
-            </Bar> */}
         </div>
 
         <button onClick={() => navigate("/volcanolist")}>Go Back</button>
