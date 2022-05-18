@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { AgGridReact } from "ag-grid-react";
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
+import 'ag-grid-community/dist/styles/ag-theme-balham-dark.css';
 import { useNavigate } from 'react-router-dom';
 import "./VolcanoList.css";
 
@@ -12,11 +13,15 @@ function VolcanoList() {
 
   //hook likely required
   const COUNTRY = "Australia";
-  //const [countryState, setCountry] = useState("");
+  const [countryState, setCountry] = useState("Australia");
+
+  const countries_url = "http://sefdb02.qut.edu.au:3001/countries";
+
 
 
   const columns = [
-    {headername: "Name", field: "name"},
+    {headername: "ID", field: "id", hide: true},
+    {headername: "Name", field: "name", filter: true},
     {headername: "Country", field: "country"},
     {headername: "Region", field: "region"},
     {headername: "Subregion", field: "subregion"}
@@ -25,21 +30,52 @@ function VolcanoList() {
   const [rowData, setRowData] = useState([]);
   const navigate = useNavigate();
 
+  // function UpdateTable(){
+  //   useEffect(() => {
+  //     fetch(`http://sefdb02.qut.edu.au:3001/volcanoes?country=${countryState}`)
+  //     .then((res) => res.json())
+  //     .then((volcanoes) => 
+  //     volcanoes.map((volcanoes) =>{
+  //       return{
+  //         name: volcanoes.name,
+  //         country: volcanoes.country,
+  //         region: volcanoes.region,
+  //         subregion: volcanoes.subregion 
+  //       };
+  //     })
+  //     )
+  //     .then((rowData) => setRowData(rowData));
+  //   }, []);
+  // }
+
    useEffect(() => {
-    fetch(`http://sefdb02.qut.edu.au:3001/volcanoes?country=${COUNTRY}`)
+    // fetch(`http://sefdb02.qut.edu.au:3001/volcanoes?country=${countryState}`)
+    fetch(`http://sefdb02.qut.edu.au:3001/volcanoes?country=Japan`)
     .then((res) => res.json())
     .then((volcanoes) => 
     volcanoes.map((volcanoes) =>{
       return{
+        id: volcanoes.id,
         name: volcanoes.name,
         country: volcanoes.country,
         region: volcanoes.region,
-        subregion: volcanoes.subregion 
+        subregion: volcanoes.subregion
       };
     })
     )
     .then((rowData) => setRowData(rowData));
   }, []);
+
+  function GetCountries(){
+      const [items, setItems] = useState([]);
+
+      useEffect(() => {
+        const response = fetch(countries_url);
+        const body = response.json();
+        setItems(body.results.map(({countries}) => ({label: countries, value: countries})));
+      }, []);
+
+  }
 
   return (
     <div className='container'>
@@ -48,10 +84,10 @@ function VolcanoList() {
         <label className='country-label'>
           Country: 
           <select>
-            <option value="Australia">Australia</option>
-            <option value="Japan">Japan</option>
+            <option value="">{countryState}</option>
           </select>
         </label>
+        {/* {countryState} */}
       </div>
 
       
@@ -61,13 +97,24 @@ function VolcanoList() {
         width: "800px"
       }}>
         <AgGridReact
-        columnDefs={columns}
-        rowData={rowData}
-        pagination={true}
-        paginationPageSize={11}>
+          columnDefs={columns}
+          rowData={rowData}
+          pagination={true}
+          paginationPageSize={11}
+          //onClick={(row) => navigate(`/volcano?name=${row.volcanoes.name}`) }
+          onCellClicked={(row) => navigate(`/individualvolcano?
+            &name=${row.data.name}
+            &id=${row.data.id}
+            &country=${row.data.country}`)
+
+          }
+
+        >
 
         </AgGridReact>
       </div>
+      <button onClick={GetCountries}>Get Countries</button>
+      <button onClick={() => navigate("/individualvolcano")}>Go to Individual Volcano Page</button>
     </div>
   )
 }

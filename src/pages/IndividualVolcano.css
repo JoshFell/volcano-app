@@ -1,0 +1,18 @@
+.volcano-title{
+    text-align: center;
+    margin-top: 5px;
+}
+
+.country-title{
+    text-align: center;
+}
+
+h3{
+    text-align: center;
+    margin-bottom: 20px;
+    text-decoration: underline;
+}
+
+.volcano-graph{
+    margin-bottom: 800px;
+}
