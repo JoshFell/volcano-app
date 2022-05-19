@@ -3,10 +3,6 @@ import { Form, Button, Alert } from 'react-bootstrap'
 
 function Register() {
   const API_URL = `http://sefdb02.qut.edu.au:3001`
-  //mayhaps hook------
-  const EMAIL = "";
-  const PASSWORD = "";
-  //------------------
 
   function RegisterUser(){
     const url = `${API_URL}/user/register`;
@@ -14,10 +10,10 @@ function Register() {
     return fetch(url, {
     method: "POST",
     headers: {accept: "application/json", "Content-Type" : "application/json"},
-    body: JSON.stringify({email: "mike@gmail.com", password: "password"}) 
+    body: JSON.stringify({email: "fgasfga@gmail.com", password: "password"}) 
   })
   .then(res => res.json())
-  .then(res => console.log(res))
+  .then(res =>alert(res.message))
 }
 
   return (

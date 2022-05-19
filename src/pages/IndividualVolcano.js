@@ -35,7 +35,7 @@ export default function Volcano() {
 
         <hr />
 
-        <h3>Volcano Information</h3>
+        {/* <h3>Volcano Information</h3> */}
         <p>Subregion: {volcanoData.subregion}</p>
         <p>Last Eruption: {volcanoData.last_eruption}</p>
         <p>Summit: {volcanoData.summit}m</p>
@@ -46,7 +46,7 @@ export default function Volcano() {
         <hr />
 
         <div className='volcano-map'>
-          <h3>Map</h3>
+          <h3>Location</h3>
           <Map 
             height={500}
             defaultCenter={[0, 0]} 

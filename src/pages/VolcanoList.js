@@ -101,7 +101,6 @@ function VolcanoList() {
           rowData={rowData}
           pagination={true}
           paginationPageSize={11}
-          //onClick={(row) => navigate(`/volcano?name=${row.volcanoes.name}`) }
           onCellClicked={(row) => navigate(`/individualvolcano?
             &name=${row.data.name}
             &id=${row.data.id}
