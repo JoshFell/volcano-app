@@ -1,3 +1,7 @@
+.container > p{
+    font-size: large;
+}
+
 .volcano-title{
     text-align: center;
     margin-top: 25px;
@@ -13,6 +17,6 @@ h3{
     text-decoration: underline;
 }
 
-.volcano-graph{
+/* .volcano-graph{
     margin-bottom: 800px;
-}
+} */

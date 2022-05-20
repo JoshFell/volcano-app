@@ -3,10 +3,7 @@ import { Form, Button } from 'react-bootstrap'
 
 function Login() {
   const API_URL = `http://sefdb02.qut.edu.au:3001`
-  //mayhaps hook------
-  const EMAIL = "";
-  const PASSWORD = "";
-  //------------------
+  const token = localStorage.getItem("token")
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -26,12 +23,12 @@ function Login() {
       method: "POST",
       headers: {accept: "application/json", "Content-Type" : "application/json"},
       // body: JSON.stringify({email: `${email}`, password: `${password}`}) 
-      body: JSON.stringify({email: "mike@gmail.com", password: "passwordd"})
+      body: JSON.stringify({email: "mike@gmail.com", password: "password"})
     })
     .then(res => res.json())
-    .then(res => {res.message ? alert(res.message) : console.log("No message")}) //console.log(res)
+    .then(res => {res.message ? alert(res.message) : alert("Login Successful")}) //console.log(res)
     .then(res => {
-      localStorage.setItem("token", res.token);
+      localStorage.setItem("token", res.token); //possible help to use token: https://www.freecodecamp.org/news/how-to-use-localstorage-with-react-hooks-to-set-and-get-items/
     });
   }
 

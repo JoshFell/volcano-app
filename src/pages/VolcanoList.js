@@ -14,6 +14,7 @@ function VolcanoList() {
   //hook likely required
   const COUNTRY = "Australia";
   const [countryState, setCountry] = useState("Australia");
+  const [cntryData, setCntryData] = useState([]);
 
   const countries_url = "http://sefdb02.qut.edu.au:3001/countries";
 
@@ -66,16 +67,16 @@ function VolcanoList() {
     .then((rowData) => setRowData(rowData));
   }, []);
 
-  function GetCountries(){
-      const [items, setItems] = useState([]);
+  // function GetCountries(){
+  //     const getCountryData = async () => {
+  //       const res = await fetch(countries_url);
+  //       const countryData = await res.json();
+  //       setCntryData(countryData);
+  //     }
 
-      useEffect(() => {
-        const response = fetch(countries_url);
-        const body = response.json();
-        setItems(body.results.map(({countries}) => ({label: countries, value: countries})));
-      }, []);
+  //     (async () => await getCountryData())();
 
-  }
+  // }
 
   return (
     <div className='container'>
@@ -84,10 +85,9 @@ function VolcanoList() {
         <label className='country-label'>
           Country: 
           <select>
-            <option value="">{countryState}</option>
+            <option value="">...</option>
           </select>
         </label>
-        {/* {countryState} */}
       </div>
 
       
@@ -112,8 +112,7 @@ function VolcanoList() {
 
         </AgGridReact>
       </div>
-      <button onClick={GetCountries}>Get Countries</button>
-      <button onClick={() => navigate("/individualvolcano")}>Go to Individual Volcano Page</button>
+      <p className='tip'>Click on a cell to see more information</p>
     </div>
   )
 }

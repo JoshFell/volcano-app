@@ -2,16 +2,24 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Map, Marker } from 'pigeon-maps';
 import { Bar } from 'react-chartjs-2'; 
+import { Button } from 'react-bootstrap';
 import "./IndividualVolcano.css"
+import InfoCard from "../components/InfoCard"
+import EruptionIcon from "../images/eruption.png"
+import SummitIcon from "../images/summit.png"
+import ElevationIcon from "../images/elevation.png"
 
 export default function Volcano() {
+    const token = localStorage.getItem("token")
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const volcano_id = searchParams.get("id");
-
     const [volcanoData, setVolcanoData] = useState([]);
-
     const API_URL = `http://sefdb02.qut.edu.au:3001/volcano/${volcano_id}`
+    const LATITUDE = Number(`${volcanoData.latitude}`)
+    const LONGITUDE = Number(`${volcanoData.longitude}`)
+    const [center, setCenter] = useState([LATITUDE, LONGITUDE])
+    const [zoom, setZoom] = useState(10)
 
     useEffect(() => {
       const getValcanoData = async () => {
@@ -21,27 +29,35 @@ export default function Volcano() {
       }
 
       (async () => await getValcanoData())();
-    }, []); //https://www.youtube.com/watch?v=9vvtO0S1KlY
-    
-  const LATITUDE = Number(`${volcanoData.latitude}`)
-  const LONGITUDE = Number(`${volcanoData.longitude}`)
-  const [center, setCenter] = useState([LATITUDE, LONGITUDE])
-  const [zoom, setZoom] = useState(10)
+    }, []);
 
   return (
     <div className='container'>
         <h1 className='volcano-title'>{volcanoData.name}</h1>
-        <h2 className='country-title'>{volcanoData.country}</h2>
+        <h2 className='country-title'>{volcanoData.subregion}, {volcanoData.country}</h2>
 
         <hr />
 
         {/* <h3>Volcano Information</h3> */}
-        <p>Subregion: {volcanoData.subregion}</p>
-        <p>Last Eruption: {volcanoData.last_eruption}</p>
+        {/* <p>Subregion: {volcanoData.subregion}</p> */}
+        {/* <p>Last Eruption: {volcanoData.last_eruption}</p>
         <p>Summit: {volcanoData.summit}m</p>
         <p>Elevation: {volcanoData.elevation}ft</p>
         <p>Latitude: {volcanoData.latitude}</p>
-        <p>Longitude: {volcanoData.longitude}</p>
+        <p>Longitude: {volcanoData.longitude}</p> */}
+        <h3>Volcano Information</h3>
+        <div className='cards-container'>
+          <InfoCard cardTitle="Last Eruption" icon={EruptionIcon} cardData={`${volcanoData.last_eruption}`} />
+          <InfoCard cardTitle="Summit" icon={SummitIcon} cardData={`${volcanoData.summit}m`} />
+          <InfoCard cardTitle="Elevation" icon={ElevationIcon} cardData={`${volcanoData.elevation}ft`} />
+        </div>
+
+        {console.log(`Token: ${token}`)}
+        
+        {/* <label>Population</label>
+        <ul>
+          <li>Population 5km: {volcanoData.population_5km}</li>
+        </ul> */}
 
         <hr />
 
@@ -77,7 +93,7 @@ export default function Volcano() {
 
         </div>
 
-        <button onClick={() => navigate("/volcanolist")}>Go Back</button>
+        <Button variant="danger" onClick={() => navigate("/volcanolist")}>Go Back</Button>
     </div>
   )
 }

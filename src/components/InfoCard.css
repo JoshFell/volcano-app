@@ -1,0 +1,31 @@
+.info-card-container{
+    margin-right: 50px;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background-color: #D32F2F;
+    display:flexbox;
+    align-items:center;
+    text-align: center;
+    justify-content: center;
+    align-self:center;
+}
+
+.info-card-container > img{
+    margin-top: 25px;
+    height: 120px;
+    width: 80px;
+}
+
+.info-card-container:hover{
+    border: solid 3px black;
+    transition: 0.2s;
+}
+
+/* .card-title{
+    color: #fff;
+}
+
+.card-data{
+    color: #fff;
+} */

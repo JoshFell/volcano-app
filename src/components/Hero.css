@@ -1,5 +1,5 @@
 .hero-container{
-    height: 100vh;
+    /* height: 100vh; */
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -12,4 +12,12 @@
     color: black;
     font-size: 60px;
     /* margin-top: -400px; */
+  }
+
+  .hero-container .hero-login{
+      margin: 10px;
+  }
+
+  .hero-container .discover{
+      margin-top: 10px;
   }

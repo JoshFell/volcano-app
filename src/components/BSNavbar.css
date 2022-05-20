@@ -1,4 +1,5 @@
 .navbar{
-    background-color: #F44336;
+    background-color: #D32F2F; /*#F44336 */
     position: fixed;
+    font-size: large;
 }

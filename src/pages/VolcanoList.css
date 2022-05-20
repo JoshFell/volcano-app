@@ -1,2 +1,18 @@
 .container{
 }
+
+.tip{
+    font-size: larger;
+    color: dimgrey;
+}
+
+.ag-theme-balham{
+    font-size: large;
+}
+
+.cards-container{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
