@@ -5,6 +5,7 @@ import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham-dark.css';
 import { useNavigate } from 'react-router-dom';
 import "./VolcanoList.css";
+import { Accordion, Button, Form } from 'react-bootstrap';
 
 
 
@@ -13,45 +14,26 @@ function VolcanoList() {
 
   //hook likely required
   const COUNTRY = "Australia";
-  const [countryState, setCountry] = useState("Australia");
+  const [countryState, setCountry] = useState("Japan");
   const [cntryData, setCntryData] = useState([]);
-
+  const [rowData, setRowData] = useState([]);
+  const [userInput, setUserInput] = useState("");
+  const navigate = useNavigate();
   const countries_url = "http://sefdb02.qut.edu.au:3001/countries";
-
-
 
   const columns = [
     {headerName: "ID", field: "id", hide: true},
     {headerName: "Name", field: "name", filter: true},
     {headerName: "Country", field: "country"},
-    {headerName: "Region", field: "region"},
-    {headerName: "Subregion", field: "subregion"}
+    {headerName: "Region", field: "region", filter: true},
+    {headerName: "Subregion", field: "subregion", filter: true}
   ]
 
-  const [rowData, setRowData] = useState([]);
-  const navigate = useNavigate();
 
-  // function UpdateTable(){
-  //   useEffect(() => {
-  //     fetch(`http://sefdb02.qut.edu.au:3001/volcanoes?country=${countryState}`)
-  //     .then((res) => res.json())
-  //     .then((volcanoes) => 
-  //     volcanoes.map((volcanoes) =>{
-  //       return{
-  //         name: volcanoes.name,
-  //         country: volcanoes.country,
-  //         region: volcanoes.region,
-  //         subregion: volcanoes.subregion 
-  //       };
-  //     })
-  //     )
-  //     .then((rowData) => setRowData(rowData));
-  //   }, []);
-  // }
+  //-------------------------------------------------------------------------------------------
 
    useEffect(() => {
-    // fetch(`http://sefdb02.qut.edu.au:3001/volcanoes?country=${countryState}`)
-    fetch(`http://sefdb02.qut.edu.au:3001/volcanoes?country=Japan`)
+    fetch(`http://sefdb02.qut.edu.au:3001/volcanoes?country=${countryState}`)
     .then((res) => res.json())
     .then((volcanoes) => 
     volcanoes.map((volcanoes) =>{
@@ -65,38 +47,53 @@ function VolcanoList() {
     })
     )
     .then((rowData) => setRowData(rowData));
+  }, [countryState]);
+
+  //-------------------------------------------------------------------------------------------
+
+  useEffect(() => {
+    fetch(`http://sefdb02.qut.edu.au:3001/countries`)
+    .then(response => response.json())
+    .then(response => setCntryData(response))
+    // .then(() => console.log(cntryData[5]))
   }, []);
 
-  // function GetCountries(){
-  //     const getCountryData = async () => {
-  //       const res = await fetch(countries_url);
-  //       const countryData = await res.json();
-  //       setCntryData(countryData);
-  //     }
-
-  //     (async () => await getCountryData())();
-
-  // }
+  function CheckCountry(){
+    for (let i = 0; i < cntryData.length; i++){
+      try{
+        if (userInput == cntryData[i]){
+          setCountry(userInput)
+          console.log("Country Found")
+          setUserInput("")
+        }
+    }
+    catch{
+      alert("Country not found")
+    }
+      // console.log(cntryData[i])
+    }
+  }
 
   return (
     <div className='container'>
       <br />
       <div className='search-container'>
-        <label className='country-label'>
-          Country: 
-          <select>
-            <option value="">...</option>
-          </select>
-        </label>
+        <Form>
+          <Form.Group>
+              <Form.Control placeholder='Search Country...' type="text" value={userInput} onChange={(e) => setUserInput(e.target.value)} />
+              {/* <Button variant="danger" onClick={CheckCountry}>Search</Button> */}
+          </Form.Group>
+        </Form>
+        <Button className='search-btn' variant="danger" onClick={CheckCountry}>Search</Button>
       </div>
 
-      
       <div className='ag-theme-balham'
       style={{
         height: "400px",
         width: "800px"
       }}>
         <AgGridReact
+          animateRows={true}
           columnDefs={columns}
           rowData={rowData}
           pagination={true}
@@ -113,6 +110,25 @@ function VolcanoList() {
         </AgGridReact>
       </div>
       <p className='tip'>Click on a cell to see more information</p>
+
+      <div className='accordian-container'>
+        <Accordion defaultActiveKey="1">
+          <Accordion.Item eventKey="0">
+            <Accordion.Header>Available Countries</Accordion.Header>
+            <Accordion.Body>
+              <div>
+                {cntryData.map(data => <p>{data}</p>)}
+              </div>
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
+      </div>
+
+      {/* <Button variant="danger" onClick={() => setCountry("Australia")}>Change to Australia</Button>
+      <br />
+      <br />
+      <Button variant="danger" onClick={() => setCountry("Japan")}>Change to Japan</Button> */}
+
     </div>
   )
 }

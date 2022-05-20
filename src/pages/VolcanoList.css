@@ -1,6 +1,3 @@
-.container{
-}
-
 .tip{
     font-size: larger;
     color: dimgrey;
@@ -15,4 +12,14 @@
     align-content: center;
     align-items: center;
     justify-content: center;
+}
+
+.search-container{
+    display: flex;
+    justify-content: left;
+    margin-bottom: 5px;
+}
+
+.search-container .search-btn{
+    margin-left: 2px;
 }

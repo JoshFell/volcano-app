@@ -39,7 +39,6 @@ function Login() {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control 
-            value={email} 
             type="email" 
             placeholder="Enter email" 
             // onChange={GetEmail(email)}
@@ -49,7 +48,6 @@ function Login() {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control 
-            value={password} 
             type="password" 
             placeholder="Password" 
             // onChange={GetPassword(password)} 

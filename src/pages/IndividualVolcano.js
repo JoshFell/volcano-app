@@ -38,26 +38,12 @@ export default function Volcano() {
 
         <hr />
 
-        {/* <h3>Volcano Information</h3> */}
-        {/* <p>Subregion: {volcanoData.subregion}</p> */}
-        {/* <p>Last Eruption: {volcanoData.last_eruption}</p>
-        <p>Summit: {volcanoData.summit}m</p>
-        <p>Elevation: {volcanoData.elevation}ft</p>
-        <p>Latitude: {volcanoData.latitude}</p>
-        <p>Longitude: {volcanoData.longitude}</p> */}
         <h3>Volcano Information</h3>
         <div className='cards-container'>
           <InfoCard cardTitle="Last Eruption" icon={EruptionIcon} cardData={`${volcanoData.last_eruption}`} />
           <InfoCard cardTitle="Summit" icon={SummitIcon} cardData={`${volcanoData.summit}m`} />
           <InfoCard cardTitle="Elevation" icon={ElevationIcon} cardData={`${volcanoData.elevation}ft`} />
         </div>
-
-        {console.log(`Token: ${token}`)}
-        
-        {/* <label>Population</label>
-        <ul>
-          <li>Population 5km: {volcanoData.population_5km}</li>
-        </ul> */}
 
         <hr />
 

@@ -10,7 +10,7 @@ function Register() {
     return fetch(url, {
     method: "POST",
     headers: {accept: "application/json", "Content-Type" : "application/json"},
-    body: JSON.stringify({email: "fgasfga@gmail.com", password: "password"}) 
+    body: JSON.stringify({email: "fgasfgadf@gmail.com", password: ""}) 
   })
   .then(res => res.json())
   .then(res =>alert(res.message))
