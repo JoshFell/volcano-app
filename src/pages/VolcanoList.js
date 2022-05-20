@@ -5,7 +5,7 @@ import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham-dark.css';
 import { useNavigate } from 'react-router-dom';
 import "./VolcanoList.css";
-import { Accordion, Button, Form } from 'react-bootstrap';
+import { Accordion, Badge, Button, Form } from 'react-bootstrap';
 
 
 
@@ -108,16 +108,16 @@ function VolcanoList() {
         >
 
         </AgGridReact>
-      </div>
+      
       <p className='tip'>Click on a cell to see more information</p>
 
       <div className='accordian-container'>
         <Accordion defaultActiveKey="1">
           <Accordion.Item eventKey="0">
-            <Accordion.Header>Available Countries</Accordion.Header>
+            <Accordion.Header><Badge className='country-badge' bg="danger">{cntryData.length}</Badge>Available Countries</Accordion.Header>
             <Accordion.Body>
               <div>
-                {cntryData.map(data => <p>{data}</p>)}
+                {cntryData.map((data) => <p>{data}</p>)}
               </div>
             </Accordion.Body>
           </Accordion.Item>
@@ -129,6 +129,7 @@ function VolcanoList() {
       <br />
       <Button variant="danger" onClick={() => setCountry("Japan")}>Change to Japan</Button> */}
 
+      </div>
     </div>
   )
 }
