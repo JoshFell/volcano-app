@@ -12,7 +12,7 @@ import { Accordion, Badge, Button, Form } from 'react-bootstrap';
 
 function VolcanoList() {
 
-  //hook likely required
+  const token = localStorage.getItem("token");
   const COUNTRY = "Australia";
   const [countryState, setCountry] = useState("Japan");
   const [cntryData, setCntryData] = useState([]);

@@ -10,7 +10,6 @@ import SummitIcon from "../images/summit.png"
 import ElevationIcon from "../images/elevation.png"
 
 export default function Volcano() {
-    const token = localStorage.getItem("token")
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const volcano_id = searchParams.get("id");
@@ -20,16 +19,32 @@ export default function Volcano() {
     const LONGITUDE = Number(`${volcanoData.longitude}`)
     const [center, setCenter] = useState([LATITUDE, LONGITUDE])
     const [zoom, setZoom] = useState(10)
+    const token = localStorage.getItem("token");
+    const headers = {
+      accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    }
+
+    // useEffect(() => {
+    //   const getValcanoData = async () => {
+    //     const res = await fetch(API_URL, {
+    //       headers: {
+    //         Authorization: "Bearer " + token,
+    //       },
+    //     });
+    //     const data = await res.json();
+    //     setVolcanoData(data); 
+    //   }
+
+    //   (async () => await getValcanoData())();
+    // }, []);
 
     useEffect(() => {
-      const getValcanoData = async () => {
-        const res = await fetch(API_URL);
-        const data = await res.json();
-        setVolcanoData(data); 
-      }
-
-      (async () => await getValcanoData())();
-    }, []);
+      fetch(API_URL, {headers})
+      .then((res) => res.json())
+      .then((res) => setVolcanoData(res));
+    }, [])
 
   return (
     <div className='container'>
@@ -66,6 +81,10 @@ export default function Volcano() {
 
         <div className='volcano-graph'>
             <h3>Population Information</h3>
+            <p>population 5km: {volcanoData.population_5km}</p>
+            <p>population 10km: {volcanoData.population_10km}</p>
+            <p>population 30km: {volcanoData.population_30km}</p>
+            <p>population 100km: {volcanoData.population_100km}</p>
             {/* <Bar
               data={{
                 labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],

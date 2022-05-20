@@ -1,4 +1,9 @@
-.container > p{
+.individual-volcano-container{
+    width: 80%;
+    margin: 50px
+}
+
+.individual-volcano-container > p{
     font-size: large;
 }
 

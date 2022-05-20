@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { Form, Button, Alert } from 'react-bootstrap'
+import "./Register.css"
 
 function Register() {
   const API_URL = `http://sefdb02.qut.edu.au:3001`
@@ -19,7 +20,7 @@ function Register() {
 }
 
   return (
-    <div className='container'>
+    <div className='register-container'>
       <br />
       <Form>
         <Form.Group className="mb-3" controlId="formBasicEmail">

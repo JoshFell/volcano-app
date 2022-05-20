@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import { Form, Button } from 'react-bootstrap'
+import "./Login.css"
 
 function Login() {
   const API_URL = `http://sefdb02.qut.edu.au:3001`
-  const token = localStorage.getItem("token")
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -17,30 +17,34 @@ function Login() {
       body: JSON.stringify({email: `${email}`, password: `${password}`})
     })
     .then(res => res.json())
-    .then(res => {res.message ? alert(res.message) : alert("Login Successful")}) //console.log(res)
-    .then(res => {
-      localStorage.setItem("token", res.token); //possible help to use token: https://www.freecodecamp.org/news/how-to-use-localstorage-with-react-hooks-to-set-and-get-items/
-    })
+    .then((res) => {
+      localStorage.setItem("token", res.token);
+      console.log(localStorage.getItem("token"));
+      {res.message ? alert(res.message) : alert("Login Successful")}
+    }) 
+    // .then((res) => {res.message ? alert(res.message) : alert("Login Successful")})
+
   }
 
   return (
-    <div className='container'>
-      <br />
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} />
-        </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-        </Form.Group>
-        <Button variant="danger" onClick={UserLogin}>
-          Login
-        </Button>
-    </Form>
-    </div>
+      <div className='login-container'>
+        <br />
+        <Form>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control type="email" placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+          </Form.Group>
+          <Button variant="danger" onClick={UserLogin}>
+            Login
+          </Button>
+      </Form>
+      </div>
   )
 }
 
