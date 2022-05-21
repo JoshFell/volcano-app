@@ -1,23 +1,45 @@
-.hero-container{
-    /* height: 100vh; */
+/* .hero-container{
     width: 100%;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* background: url('../images/volcano-hero.jpg') center no-repeat; */
+    background:linear-gradient(0deg, rgba(255, 0, 150, 0.3), url('../images/volcano-hero.jpg'));
+    background-size: cover;
+} */
+
+.hero-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+    background:linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), 
+        url("../images/volcano-hero3.jpg") no-repeat center;
+    /* width: 1000px;
+    height: 500px; */
+    height: 750px;
+    width: 100%;
 }
 
 .hero-container > h1 {
-    color: black;
+    color: #fff;
     font-size: 60px;
-    /* margin-top: -400px; */
+    margin-top: -300px;
+    text-decoration: underline;
   }
 
-  .hero-container .hero-login{
-      margin: 10px;
+  .hero-container > h2 {
+    color: #fff;
+    margin-top: 10px;
   }
 
-  .hero-container .discover{
-      margin-top: 10px;
+  .hero-buttons-container{
+    display: flex;
+    flex-direction: row;
   }
+
+.hero-container .hero-login{
+    margin-right: 10px;
+}

@@ -71,7 +71,6 @@ function VolcanoList() {
     catch{
       alert("Country not found")
     }
-      // console.log(cntryData[i])
     }
   }
 

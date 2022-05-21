@@ -8,14 +8,18 @@ function Hero() {
   const navigate = useNavigate();
 
   return (
+    // <div className='container'>
         <div className='hero-container'> 
             <h1>Volcanoes of the World</h1>
-            <img className='hero-image' src={HeroImage} alt="Hero Image" />
+            {/* <img className='hero-image' src={HeroImage} alt="Hero Image" /> */}
 
             <h2 className='discover'>Discover More</h2>
-            <Button className='hero-login' variant="danger" size='lg' onClick={()=>navigate("/login")}>Log In</Button>{' '}
-            <Button className='hero-register' variant="outline-danger" size='lg' onClick={()=>navigate("/register")}>Register</Button>{' '}
+            <div className='hero-buttons-container'>
+              <Button className='hero-login' variant="danger" size='lg' onClick={()=>navigate("/login")}>Log In</Button>{' '}
+              <Button className='hero-register' variant="outline-danger" size='lg' onClick={()=>navigate("/register")}>Register</Button>{' '}
+            </div>
         </div>
+      // </div>
   )
 }
 
