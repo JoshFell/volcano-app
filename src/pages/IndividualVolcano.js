@@ -3,11 +3,47 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Map, Marker } from 'pigeon-maps';
 import { Bar } from 'react-chartjs-2'; 
 import { Button } from 'react-bootstrap';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 import "./IndividualVolcano.css"
 import InfoCard from "../components/InfoCard"
 import EruptionIcon from "../images/eruption.png"
 import SummitIcon from "../images/summit.png"
 import ElevationIcon from "../images/elevation.png"
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+export const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'top',
+    },
+    title: {
+      display: true,
+      text: "Population Density",
+      fontSize: 20
+    },
+  },
+};
+
+const labels = ['5km', '10km', '30km', '100km'];
+
+
 
 export default function Volcano() {
     const navigate = useNavigate();
@@ -26,25 +62,38 @@ export default function Volcano() {
       Authorization: `Bearer ${token}`
     }
 
-    // useEffect(() => {
-    //   const getValcanoData = async () => {
-    //     const res = await fetch(API_URL, {
-    //       headers: {
-    //         Authorization: "Bearer " + token,
-    //       },
-    //     });
-    //     const data = await res.json();
-    //     setVolcanoData(data); 
-    //   }
-
-    //   (async () => await getValcanoData())();
-    // }, []);
-
     useEffect(() => {
       fetch(API_URL, {headers})
       .then((res) => res.json())
       .then((res) => setVolcanoData(res));
     }, [])
+
+    const data ={
+      labels,
+      datasets: [
+        {
+          label: 'Population',
+          // data: labels.map(() => volcanoData.population_5km),
+          data: [volcanoData.population_5km, volcanoData.population_10km, volcanoData.population_30km, volcanoData.population_100km],
+          backgroundColor: 'rgba(211, 47, 47, 0.7)'
+        }
+        // {
+        //   label: 'Populated within 10km',
+        //   data: labels.map(() => volcanoData.population_10km),
+        //   backgroundColor: 'rgba(53, 162, 235, 0.5)'
+        // },
+        // {
+        //   label: 'Populated within 30km',
+        //   data: labels.map(() => volcanoData.population_30km),
+        //   backgroundColor: 'rgba(255, 99, 132, 0.5)'
+        // },
+        // {
+        //   label: 'Populated within 100km',
+        //   data: labels.map(() => volcanoData.population_100km),
+        //   backgroundColor: 'rgba(255, 99, 132, 0.5)'
+        // }
+      ]
+    }
 
   return (
     <div className='container'>
@@ -85,16 +134,12 @@ export default function Volcano() {
             <p>population 10km: {volcanoData.population_10km}</p>
             <p>population 30km: {volcanoData.population_30km}</p>
             <p>population 100km: {volcanoData.population_100km}</p>
-            {/* <Bar
-              data={{
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-              }}
+            <Bar
+              data={data}
               height={400}
               width={600}
-              options={{
-                maintainAspectRatio: false,
-              }}
-              /> */}
+              options={options}
+              />
 
         </div>
 

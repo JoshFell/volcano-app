@@ -18,6 +18,7 @@ function VolcanoList() {
   const [cntryData, setCntryData] = useState([]);
   const [rowData, setRowData] = useState([]);
   const [userInput, setUserInput] = useState("");
+  const [populationDistance, setPopulationDistance] = useState();
   const navigate = useNavigate();
   const countries_url = "http://sefdb02.qut.edu.au:3001/countries";
 
@@ -80,10 +81,17 @@ function VolcanoList() {
       <div className='search-container'>
         <Form>
           <Form.Group>
-              <Form.Control placeholder='Search Country...' type="text" value={userInput} onChange={(e) => setUserInput(e.target.value)} />
+              <Form.Control className='country-search' placeholder='Search Country...' type="text" value={userInput} onChange={(e) => setUserInput(e.target.value)} />
               {/* <Button variant="danger" onClick={CheckCountry}>Search</Button> */}
           </Form.Group>
         </Form>
+        {/* <Form.Label className='population-label'>Populated Within: </Form.Label>
+        <Form.Select className='population-select'>
+          <option value="">5km</option>
+          <option value="">10km</option>
+          <option value="">30km</option>
+          <option value="">100km</option>
+        </Form.Select> */}
         <Button className='search-btn' variant="danger" onClick={CheckCountry}>Search</Button>
       </div>
 

@@ -27,3 +27,20 @@
 .country-badge{
     margin-right: 5px;
 }
+
+.country-search{
+    /* width: 580px; */
+    width: fit-content;
+}
+
+.population-label{
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 2px;
+}
+
+.population-select{
+    /* width: 100px; */
+    width: fit-content;
+    margin-left: 2px;
+}
